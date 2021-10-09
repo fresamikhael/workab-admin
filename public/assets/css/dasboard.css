@@ -1,0 +1,52 @@
+.dasboard-cards {
+   
+
+}
+
+.row.atas{
+    display: flex;
+}
+.card.atas{
+    width: 550px;
+    margin-bottom: 20px;
+    border: 0.2rem solid var(--main-color);
+}
+.card.bawah{
+    margin-top: 10px;
+    width: 350px;
+    border: 0.2rem solid var(--dark-color);
+}
+
+.card {
+    height: 180px;
+    border-radius: 10px;
+}
+
+.atas .card-header,
+.bawah .card-header{
+    color: var(--font-white);
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-align: center;
+}
+.atas .card-header {
+    background: var(--main-color);
+    
+}
+.bawah .card-header{
+    background: var(--dark-color);
+}
+.atas .card-body,
+.bawah .card-body{
+    font-size: 2.5rem;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 10px;
+}
+.atas .card-body {
+    color: var(--main-color);
+    
+}
+.bawah .card-body{
+    color: var(--dark-color);
+}

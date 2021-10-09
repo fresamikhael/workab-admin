@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background: #79AAF3;
+    font-family: 'Poppins',
+    sans-serif;
+}
+.login-page{
+    display: flex;
+}
+.container{
+    margin: auto;
+    padding-top: 125px;
+}
+.keterangan{
+    color: #fff;
+}
+.logo{
+    text-align: start;
+}
+.logo img{
+    width: 300px;
+}
+.logo h1{
+    padding-left: 55px;
+    letter-spacing: -5px;
+}
+.keterangan ul li{
+    text-transform: capitalize;
+}
+
+.form-login{
+    padding: 40px;
+    width: 600px;
+    height: 300px;
+    text-align: center;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 10px;
+}
+.form-login div{
+    padding: 5px;
+}
+.form-login input{
+    margin: auto;
+    padding: 12px;
+    display: block;
+    width: 300px;
+    height: 45px;
+    border: 1px solid #C4C4C4;
+    border-radius: 10px;
+    color: #C4C4C4;
+}
+
+.form-login .btn-submit{
+    margin: 10px;
+    background: #577BA8;
+    color: #fff;
+    width: 300px;
+    border-radius: 10px;
+    font-weight: 500;
+}
+.btn-submit:hover{
+    opacity: 90%;
+}
+.garis-bawah{
+    width: 500px;
+    height: 5px;
+}

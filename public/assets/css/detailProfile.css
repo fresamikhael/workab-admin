@@ -1,0 +1,49 @@
+header span{
+    color: var(--dark-color);
+}
+
+main {
+    height: 390px;
+}
+/* main start */
+.row{
+    justify-content: space-between;
+}
+
+.detail{
+    display: flex;
+    padding: 10px;
+}
+.detail-judul{
+    width: 200px;
+    color: var(--main-color);
+    font-weight: 600;
+}
+
+.btn-edit-detail , 
+.btn-kembali{
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    text-align: center;
+    margin: 10px;
+    padding-top: 3px;
+}
+.btn-edit-detail a ,
+.btn-kembali a{
+    text-decoration: none;
+    color: var(--font-white);
+    font-weight: 500;
+}
+.btn-edit-detail{
+    background: var(--main-color);
+}
+.btn-kembali{
+    background: var(--dark-color);
+}
+
+.detail-keterangan input{
+    border: none;
+    background: none;
+}
+/* main end */
