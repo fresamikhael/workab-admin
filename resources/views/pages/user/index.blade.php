@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-   Attendance | Admin Dashboard
+   User | Admin Dashboard
 @endsection
 
 @section('content')
