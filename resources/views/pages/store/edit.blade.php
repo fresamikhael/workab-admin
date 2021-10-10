@@ -7,43 +7,63 @@
 @section('content')
             <main>
                 <div class="container">
-                    <form action="">
-                        <div class="detail">
-                            <div class="detail-judul">ID Toko</div>
-                            <div class="detail-keterangan">
-                                <input
-                                    type="text"
-                                    value="1"
-                                    id=""
-                                    name=""
-                                    disabled
-                                />
-                            </div>
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
                         </div>
+                    @endif
+                    <form action="{{ route('store.update', $item->id) }}" method="POST" enctype="multipart/form-data">
+                        @method('PUT')
+                        @csrf
                         <div class="detail">
                             <div class="detail-judul">Nama Toko</div>
                             <div class="detail-keterangan">
-                                <input
-                                    type="text"
-                                    value="Sumber Makmur"
-                                    id=""
-                                    name=""
-                                />
+                                <input type="text" id="name" name="name" class="form-control" value="{{ $item->name }}"/>
                             </div>
                         </div>
 
                         <div class="detail">
                             <div class="detail-judul">Alamat Toko</div>
                             <div class="detail-keterangan">
-                                <textarea type="number" value="" id="" name="">
-                                    Jl.ABCD NO.12</textarea
-                                >
+                                <input type="text" id="address" name="address" class="form-control" value="{{ $item->address }}" />
+                            </div>
+                        </div>
+
+                        <div class="detail">
+                            <div class="detail-judul">Latitude</div>
+                            <div class="detail-keterangan">
+                                <input type="number" id="lat" name="lat" class="form-control" value="{{ $item->lat }}" />
+                            </div>
+                        </div>
+
+                        <div class="detail">
+                            <div class="detail-judul">Longtitude</div>
+                            <div class="detail-keterangan">
+                                <input type="number" id="long" name="long" class="form-control" value="{{ $item->long }}" />
+                            </div>
+                        </div>
+
+                        <div class="detail">
+                            <div class="detail-judul">Barcode</div>
+                            <div class="detail-keterangan">
+                                <input type="text" id="barcode" name="barcode" class="form-control" value="{{ $item->barcode }}" />
+                            </div>
+                        </div>
+
+                        <div class="detail">
+                            <div class="detail-judul">Barcode Image</div>
+                            <div class="detail-keterangan">
+                                <input type="text" id="barcode_image" name="barcode_image" class="form-control" value="{{ $item->barcode_image }}" />
                             </div>
                         </div>
 
                         <button type="submit" class="btn-save">Save</button>
                         <div class="btn-kembali">
-                            <a href="store.html">Kembali</a>
+                        <a href="{{ route('store.index') }}">Kembali</a>
                         </div>
                     </form>
                 </div>
@@ -51,5 +71,5 @@
 @endsection
 
 @push('prepend-style')
-    <link rel="stylesheet" href="assets/css/editProductStore.css" />
+    <link rel="stylesheet" href="/assets/css/editProductStore.css" />
 @endpush

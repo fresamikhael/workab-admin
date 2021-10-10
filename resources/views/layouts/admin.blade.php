@@ -27,7 +27,6 @@
             @yield('content')
 
             {{-- Footer --}}
-            @include('includes.footer')
         </div>
 
         {{-- Script --}}

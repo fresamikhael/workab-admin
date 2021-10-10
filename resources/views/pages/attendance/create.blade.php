@@ -7,42 +7,51 @@
 @section('content')
 <main>
     <div class="container">
-        <form action="">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <form action="{{ route('attendance.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf
         <div class="detail">
             <div class="detail-judul">Nama Lengkap</div>
             <div class="detail-keterangan">
-            <input type="text" value="" id="" name="" />
+            <input type="text" id="user_id" name="user_id" class="form-control" />
             </div>
         </div>
         <div class="detail">
-            <div class="detail-judul">Tanggal dan Waktu</div>
+            <div class="detail-judul">Waktu</div>
             <div class="detail-keterangan">
-            <input type="datetime-local" value="" id="" name="" />
+            <input type="text" id="time" name="time" class="form-control" />
             </div>
         </div>
         <div class="detail">
-            <div class="detail-judul">Lokasi</div>
+            <div class="detail-judul">Tipe</div>
             <div class="detail-keterangan">
-            <select id="" name="">
-                <option value="" disabled>Pilih Lokasi :</option>
-                <option value="">Jakarta</option>
-            </select>
+            <input type="text" id="type" name="type" class="form-control" />
             </div>
         </div>
         <div class="detail">
-            <div class="detail-judul">Keterangan</div>
+            <div class="detail-judul">Latitude</div>
             <div class="detail-keterangan">
-            <select id="" name="">
-                <option value="" disabled>Pilih Keterangan :</option>
-                <option value="">Check In</option>
-                <option value="">Check Out</option>
-            </select>
+            <input type="text" id="lat" name="lat" class="form-control" />
+            </div>
+        </div>
+        <div class="detail">
+            <div class="detail-judul">Longtitude</div>
+            <div class="detail-keterangan">
+            <input type="text" id="long" name="long" class="form-control" />
             </div>
         </div>
 
         <button type="submit" class="btn-save">Save</button>
         <div class="btn-kembali">
-            <a href="attendance.html">Kembali</a>
+            <a href="{{ route('attendance.index') }}">Kembali</a>
         </div>
         </form>
     </div>
@@ -50,5 +59,5 @@
 @endsection
 
 @push('prepend-style')
-    <link rel="stylesheet" href="assets/css/tambahAttendanceVisiting.css" />
+    <link rel="stylesheet" href="/assets/css/tambahAttendanceVisiting.css" />
 @endpush

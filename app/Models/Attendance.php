@@ -5,16 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Store extends Model
+class Attendance extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
-        'name',
-        'address',
+        'user_id',
+        'type',
+        'time',
         'lat',
         'long',
-        'barcode',
-        'barcode_image',
     ];
 
-    protected $table = 'shops';
+    protected $table = 'attendances';
 }

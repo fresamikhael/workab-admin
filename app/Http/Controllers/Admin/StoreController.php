@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 
+use App\Http\Requests\Admin\StoreRequest;
+
 class StoreController extends Controller
 {
     /**
@@ -25,30 +27,36 @@ class StoreController extends Controller
             return Datatables::of($query)
                 ->addColumn('action', function($item) {
                     return '
-                        <div class="btn-group">
-                            <div class="dropdown">
-                                <button class="btn btn-primary dropdown-toggle mr-1 mb-1"
-                                        type="button"
-                                        data-toggle="dropdown">
-                                        Aksi
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="' . route('store.show', $item->id) . '">
-                                        Detail
-                                    </a>
-                                    <a class="dropdown-item" href="' . route('store.edit', $item->id) . '">
-                                        Edit
-                                    </a>
-                                    <form action="' . route('store.destroy', $item->id) . '" method="POST">
-                                        ' . method_field('delete') . csrf_field() . '
-                                        <button type="submit" class="dropdown-item text-danger">
-                                            Hapus
-                                        </button>
-                                    </form>
-                                </div>
-
-                            </div>
-                        </div>
+                        <a href="' . route('store.show', $item->id) . '" class="btn-aksi">
+                            <img
+                                src="/assets/icon/detaillogo.svg"
+                                alt=""
+                                width="18px"
+                                height="19px"
+                            />
+                            <span class="tooltip">Detail</span>
+                        </a>
+                        <a href="' . route('store.edit', $item->id) . '" class="btn-aksi">
+                            <img
+                                src="/assets/icon/editlogo.svg"
+                                alt=""
+                                width="18px"
+                                height="19px"
+                            />
+                            <span class="tooltip">Edit</span>
+                        </a>
+                        <form action="' . route('store.destroy', $item->id) . '" method="POST">
+                            ' . method_field('delete') . csrf_field() . '
+                            <button type="submit" class="btn-aksi">
+                                <img
+                                    src="/assets/icon/deletelogo.svg"
+                                    alt=""
+                                    width="18px"
+                                    height="19px"
+                                />
+                                <span class="tooltip">Hapus</span>
+                            </button>
+                        </form>
                     ';
                 })
                 ->addIndexColumn()
@@ -66,7 +74,7 @@ class StoreController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.store.create');
     }
 
     /**
@@ -75,9 +83,13 @@ class StoreController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        $data = $request->all();
+
+        Store::create($data);
+
+        return redirect()->route('store.index');
     }
 
     /**
@@ -99,7 +111,11 @@ class StoreController extends Controller
      */
     public function edit($id)
     {
-        //
+        $item = Store::findOrFail($id);
+
+        return view('pages.store.edit', [
+            'item' => $item
+        ]);
     }
 
     /**
@@ -109,9 +125,15 @@ class StoreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreRequest $request, $id)
     {
-        //
+        $data = $request->all();
+
+        $item = Store::findOrFail($id);
+
+        $item->update($data);
+
+        return redirect()->route('store.index');
     }
 
     /**
@@ -122,6 +144,9 @@ class StoreController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = Store::findOrFail($id);
+        $item->delete();
+
+        return redirect()->route('store.index');
     }
 }

@@ -7,7 +7,7 @@
 @section('content')
       <main>
         <div class="btn-tambah">
-          <a href="tambahUser.html">Tambah User</a>
+          <a href="{{ route('user.create') }}">Tambah User</a>
         </div>
         <table
           id="crudTable"

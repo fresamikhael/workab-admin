@@ -7,28 +7,18 @@
 @section('content')
 <main>
     <div class="container">
-        <form action="">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
             <div class="row">
-                <div class="col-md-2">
-                    <div class="detail">
-                        <div class="detail-foto">
-                            <label for="" class="detail-judul"
-                                >Unggah Foto</label
-                            >
-                            <input
-                                type="file"
-                                class="file-foto"
-                                value=""
-                            />
-                        </div>
-                    </div>
-                    <button type="submit" class="btn-save">
-                        Save
-                    </button>
-                    <div class="btn-kembali">
-                        <a href="user.html">Kembali</a>
-                    </div>
-                </div>
                 <div class="col-md-9">
                     <div class="detail">
                         <div class="detail-judul">Nama Lengkap</div>
@@ -36,8 +26,8 @@
                             <input
                                 type="text"
                                 value=""
-                                id=""
-                                name=""
+                                id="name"
+                                name="name"
                             />
                         </div>
                     </div>
@@ -47,8 +37,8 @@
                             <input
                                 type="text"
                                 value=""
-                                id=""
-                                name=""
+                                id="nik"
+                                name="nik"
                             />
                         </div>
                     </div>
@@ -60,28 +50,28 @@
                             <input
                                 type="radio"
                                 name="gender"
-                                value="laki-laki"
-                                id="laki"
+                                value="Laki-Laki"
+                                id="Laki-Laki"
                             />
                             <label for="laki">Laki-laki</label>
                             <br />
                             <input
                                 type="radio"
                                 name="gender"
-                                value="perempuan"
-                                id="perempuan"
+                                value="Perempuan"
+                                id="Perempuan"
                             />
                             <label for="perempuan">Perempuan</label>
                         </div>
                     </div>
                     <div class="detail">
-                        <div class="detail-judul">Jabatan</div>
+                        <div class="detail-judul">Role</div>
                         <div class="detail-keterangan">
                             <input
                                 type="text"
                                 value=""
-                                id=""
-                                name=""
+                                id="role"
+                                name="role"
                             />
                         </div>
                     </div>
@@ -91,8 +81,8 @@
                             <input
                                 type="email"
                                 value=""
-                                id=""
-                                name=""
+                                id="email"
+                                name="email"
                             />
                         </div>
                     </div>
@@ -102,8 +92,8 @@
                             <input
                                 type="text"
                                 value=""
-                                id=""
-                                name=""
+                                id="username"
+                                name="username"
                             />
                         </div>
                     </div>
@@ -111,12 +101,31 @@
                         <div class="detail-judul">Password</div>
                         <div class="detail-keterangan">
                             <input
-                                type="password"
+                                type="text"
                                 value=""
-                                id=""
-                                name=""
+                                id="password"
+                                name="password"
                             />
                         </div>
+                    </div>
+                    <div class="detail">
+                        <div class="detail-foto">
+                            <label for="" class="detail-judul"
+                                >Unggah Foto</label
+                            >
+                            <input
+                                type="file"
+                                class="file-foto form-control"
+                                name="photo"
+                                id="photo"
+                            />
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-save">
+                        Save
+                    </button>
+                    <div class="btn-kembali">
+                        <a href="user.html">Kembali</a>
                     </div>
                 </div>
             </div>
@@ -126,5 +135,5 @@
 @endsection
 
 @push('prepend-style')
-    <link rel="stylesheet" href="assets/css/tambah.css">
+    <link rel="stylesheet" href="/assets/css/tambah.css">
 @endpush

@@ -7,10 +7,10 @@
 @section('content')
 <main>
     <div class="btn-tambah">
-        <a href="tambahAttendance.html">Tambah Kehadiran</a>
+        <a href="{{ route('attendance.create') }}">Tambah Kehadiran</a>
     </div>
     <table
-        id="datatables"
+        id="crudTable"
         class="table table-striped table-bordered"
         width="100%"
         cellspacing="0"
@@ -27,159 +27,35 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>1</td>
-            <td>Hendra Prasetyo contoh</td>
-            <td>12 September 2021</td>
-            <td>14:30</td>
-            <td>Jakarta</td>
-            <td>Check Out</td>
-            <td>
-            <a href="detailAttendance.html" class="btn-aksi">
-                <img
-                src="assets/icon/detaillogo.svg"
-                alt=""
-                width="18px"
-                height="19px"
-                />
-                <span class="tooltip">Detail</span>
-            </a>
-            <a href="editAttendance.html" class="btn-aksi">
-                <img
-                src="assets/icon/editlogo.svg"
-                alt=""
-                width="18px"
-                height="19px"
-                />
-                <span class="tooltip">Edit</span>
-            </a>
-            <a href="" class="btn-aksi">
-                <img
-                src="assets/icon/deletelogo.svg"
-                alt=""
-                width="18px"
-                height="19px"
-                />
-                <span class="tooltip">Hapus</span>
-            </a>
-            </td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Hendra Prasetyo contoh</td>
-            <td>12 Oktober 2021</td>
-            <td>14:30</td>
-            <td>Jakarta</td>
-            <td>Check Out</td>
-            <td>
-            <a href="detailAttendance.html" class="btn-aksi">
-                <img
-                src="assets/icon/detaillogo.svg"
-                alt=""
-                width="18px"
-                height="19px"
-                />
-                <span class="tooltip">Detail</span>
-            </a>
-            <a href="editAttendance.html" class="btn-aksi">
-                <img
-                src="assets/icon/editlogo.svg"
-                alt=""
-                width="18px"
-                height="19px"
-                />
-                <span class="tooltip">Edit</span>
-            </a>
-            <a href="" class="btn-aksi">
-                <img
-                src="assets/icon/deletelogo.svg"
-                alt=""
-                width="18px"
-                height="19px"
-                />
-                <span class="tooltip">Hapus</span>
-            </a>
-            </td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Hendra Prasetyo contoh</td>
-            <td>12 Januari 2022</td>
-            <td>14:30</td>
-            <td>Jakarta</td>
-            <td>Check Out</td>
-            <td>
-            <a href="detailAttendance.html" class="btn-aksi">
-                <img
-                src="assets/icon/detaillogo.svg"
-                alt=""
-                width="18px"
-                height="19px"
-                />
-                <span class="tooltip">Detail</span>
-            </a>
-            <a href="editAttendance.html" class="btn-aksi">
-                <img
-                src="assets/icon/editlogo.svg"
-                alt=""
-                width="18px"
-                height="19px"
-                />
-                <span class="tooltip">Edit</span>
-            </a>
-            <a href="" class="btn-aksi">
-                <img
-                src="assets/icon/deletelogo.svg"
-                alt=""
-                width="18px"
-                height="19px"
-                />
-                <span class="tooltip">Hapus</span>
-            </a>
-            </td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>Hendra Prasetyo contoh</td>
-            <td>12 Januari 2021</td>
-            <td>14:30</td>
-            <td>Jakarta</td>
-            <td>Check Out</td>
-            <td>
-            <a href="detailAttendance.html" class="btn-aksi">
-                <img
-                src="assets/icon/detaillogo.svg"
-                alt=""
-                width="18px"
-                height="19px"
-                />
-                <span class="tooltip">Detail</span>
-            </a>
-            <a href="editAttendance.html" class="btn-aksi">
-                <img
-                src="assets/icon/editlogo.svg"
-                alt=""
-                width="18px"
-                height="19px"
-                />
-                <span class="tooltip">Edit</span>
-            </a>
-            <a href="" class="btn-aksi">
-                <img
-                src="assets/icon/deletelogo.svg"
-                alt=""
-                width="18px"
-                height="19px"
-                />
-                <span class="tooltip">Hapus</span>
-            </a>
-            </td>
-        </tr>
         </tbody>
     </table>
 </main>
 @endsection
 
-@push('prepend-style')
-    <link rel="stylesheet" href="assets/css/attendance.css" />
+@push('addon-script')
+    <script>
+        var datatable = $('#crudTable').DataTable({
+            processing: true,
+            serverSide:true,
+            ordering: true,
+            ajax: {
+                url: '{!! url()->current() !!}',
+            },
+            columns: [
+                { data: 'id', name: 'id'},
+                { data: 'user_id', name: 'user_id'},
+                { data: 'created_at', name: 'created_at'},
+                { data: 'time', name: 'time'},
+                { data: 'lat', name: 'lat'},
+                { data: 'type', name: 'type'},
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searcable: false,
+                    width: '15%'
+                }
+            ]
+        })
+    </script>
 @endpush

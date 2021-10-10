@@ -7,7 +7,7 @@
 @section('content')
       <main>
         <div class="btn-tambah">
-          <a href="tambahStore.html">Tambah Toko</a>
+          <a href="{{ route('store.create') }}">Tambah Toko</a>
         </div>
         <table
           id="crudTable"

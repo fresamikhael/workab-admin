@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\UserRequest;
 use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
@@ -23,24 +24,36 @@ class UserController extends Controller
             return Datatables::of($query)
                 ->addColumn('action', function($item) {
                     return '
-                        <div class="btn-group">
-                            <div class="dropdown">
-                                <button class="btn btn-primary dropdown-toggle mr-1 mb-1"
-                                        type="button"
-                                        data-toggle="dropdown">
-                                        Aksi
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="' . route('user.edit', $item->id) . '">
-                                        Edit
-                                    </a>
-                                    <a class="dropdown-item text-danger" href="' . route('user.show', $item->id) . '">
-                                        Hapus
-                                    </a>
-                                </div>
-
-                            </div>
-                        </div>
+                        <a href="' . route('user.show', $item->id) . '" class="btn-aksi">
+                            <img
+                                src="/assets/icon/detaillogo.svg"
+                                alt=""
+                                width="18px"
+                                height="19px"
+                            />
+                            <span class="tooltip">Detail</span>
+                        </a>
+                        <a href="' . route('user.edit', $item->id) . '" class="btn-aksi">
+                            <img
+                                src="/assets/icon/editlogo.svg"
+                                alt=""
+                                width="18px"
+                                height="19px"
+                            />
+                            <span class="tooltip">Edit</span>
+                        </a>
+                        <form action="' . route('user.destroy', $item->id) . '" method="POST">
+                            ' . method_field('delete') . csrf_field() . '
+                            <button type="submit" class="btn-aksi">
+                                <img
+                                    src="/assets/icon/deletelogo.svg"
+                                    alt=""
+                                    width="18px"
+                                    height="19px"
+                                />
+                                <span class="tooltip">Hapus</span>
+                            </button>
+                        </form>
                     ';
                 })
                 ->rawColumns(['action'])
@@ -58,7 +71,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.user.create');
     }
 
     /**
@@ -67,9 +80,16 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        $data = $request->all();
+
+        $data['password'] = bcrypt($request->password);
+        $data['photo'] = $request->file('photo')->store('assets/user','public');
+
+        User::create($data);
+
+        return redirect()->route('user.index');
     }
 
     /**
@@ -91,7 +111,11 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $item = User::findOrFail($id);
+
+        return view('pages.user.edit', [
+            'item' => $item
+        ]);
     }
 
     /**
@@ -101,9 +125,15 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
-        //
+        $data = $request->all();
+
+        $item = User::findOrFail($id);
+
+        $item->update($data);
+
+        return redirect()->route('user.index');
     }
 
     /**
@@ -114,6 +144,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = User::findOrFail($id);
+        $item->delete();
+
+        return redirect()->route('user.index');
     }
 }

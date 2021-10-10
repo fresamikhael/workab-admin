@@ -13,52 +13,31 @@
                     <div class="detail">
                         <div class="detail-judul">Nama Lengkap</div>
                         <div class="detail-keterangan">
-                            <input
-                                type="text"
-                                value="Hendra Contoh"
-                                id=""
-                                name=""
-                            />
+                        <input type="text" value="{{ $item->user_id }}" id="user_id" name="user_id" class="form-control" />
                         </div>
                     </div>
                     <div class="detail">
-                        <div class="detail-judul">
-                            Tanggal dan Waktu
-                        </div>
+                        <div class="detail-judul">Waktu</div>
                         <div class="detail-keterangan">
-                            <input
-                                type="datetime-local"
-                                value=""
-                                id=""
-                                name=""
-                            />
+                        <input type="text" value="{{ $item->time }}" id="time" name="time" class="form-control" />
                         </div>
                     </div>
                     <div class="detail">
-                        <div class="detail-judul">Lokasi</div>
+                        <div class="detail-judul">Tipe</div>
                         <div class="detail-keterangan">
-                            <select id="" name="">
-                                <option value="" disabled>
-                                    Pilih Lokasi :
-                                </option>
-                                <option value="" selected>
-                                    Jakarta
-                                </option>
-                            </select>
+                        <input type="text" value="{{ $item->type }}" id="type" name="type" class="form-control" />
                         </div>
                     </div>
                     <div class="detail">
-                        <div class="detail-judul">Keterangan</div>
+                        <div class="detail-judul">Latitude</div>
                         <div class="detail-keterangan">
-                            <select id="" name="">
-                                <option value="" disabled>
-                                    Pilih Keterangan :
-                                </option>
-                                <option value="" selected>
-                                    Check In
-                                </option>
-                                <option value="">Check Out</option>
-                            </select>
+                        <input type="text" value="{{ $item->lat }}" id="lat" name="lat" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="detail">
+                        <div class="detail-judul">Longtitude</div>
+                        <div class="detail-keterangan">
+                        <input type="text" value="{{ $item->long }}" id="long" name="long" class="form-control" />
                         </div>
                     </div>
 
@@ -66,7 +45,7 @@
                         Save
                     </button>
                     <div class="btn-kembali">
-                        <a href="attendance.html">Kembali</a>
+                        <a href="{{ route('attendance.index') }}">Kembali</a>
                     </div>
                 </div>
             </div>
@@ -76,5 +55,5 @@
 @endsection
 
 @push('prepend-style')
-    <link rel="stylesheet" href="assets/css/editAttendanceVisiting.css" />
+    <link rel="stylesheet" href="/assets/css/editAttendanceVisiting.css" />
 @endpush

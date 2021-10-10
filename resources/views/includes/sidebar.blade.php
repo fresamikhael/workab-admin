@@ -15,8 +15,8 @@
                             <span>Dashboard</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="attendance.html">
+                    <li class="{{ (request()->is('admin/attendance*')) ? 'active' : '' }}">
+                        <a href="{{ route('attendance.index') }}">
                             <span>Attendance</span>
                         </a>
                     </li>
@@ -30,8 +30,8 @@
                             <span>User</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="product.html">
+                    <li class="{{ (request()->is('admin/product*')) ? 'active' : '' }}">
+                        <a href="{{ route('product.index') }}">
                             <span>Product</span>
                         </a>
                     </li>

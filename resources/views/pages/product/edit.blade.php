@@ -7,38 +7,31 @@
 @section('content')
       <main>
         <div class="container">
-          <form action="">
-            <div class="detail">
-              <div class="detail-judul">ID Produk</div>
-              <div class="detail-keterangan">
-                <input type="text" value="1" id="" name="" disabled />
-              </div>
-            </div>
+          <form action="{{ route('attendance.update', $item->id) }}" method="POST" enctype="multipart/form-data">
+            @method('PUT')
+            @csrf
             <div class="detail">
               <div class="detail-judul">Nama Produk</div>
               <div class="detail-keterangan">
-                <input type="text" value="Ban Tubles 123" id="" name="" />
+                <input type="text" id="name" name="name" value="{{ $item->name }}"/>
               </div>
             </div>
             <div class="detail">
               <div class="detail-judul">Nama Toko</div>
               <div class="detail-keterangan">
-                <select id="" name="">
-                  <option value="" disabled>Pilih Toko :</option>
-                  <option value="" selected>Mekarjaya</option>
-                </select>
+                <input type="text" id="shop_id" name="shop_id" value="{{ $item->shop_id }}" />
               </div>
             </div>
             <div class="detail">
               <div class="detail-judul">Stock</div>
               <div class="detail-keterangan">
-                <input type="number" value="120" id="" name="" />
+                <input type="number" id="stock" name="stock" value="{{ $item->stock }}" />
               </div>
             </div>
 
             <button type="submit" class="btn-save">Save</button>
             <div class="btn-kembali">
-              <a href="product.html">Kembali</a>
+              <a href="{{ route('product.index') }}">Kembali</a>
             </div>
           </form>
         </div>
@@ -46,5 +39,5 @@
 @endsection
 
 @push('prepend-style')
-    <link rel="stylesheet" href="assets/css/editProductStore.css" />
+    <link rel="stylesheet" href="/assets/css/editProductStore.css" />
 @endpush
