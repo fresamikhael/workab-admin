@@ -18,22 +18,47 @@
         </ul>
         </div>
         <div class="col-6 form-login">
-        <form action="">
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
             <div class="inputBox">
-            <input
-                type="text"
-                name=""
-                id=""
-                placeholder="Email atau Nomor Telephon"
-            />
+                <input
+                id="username"
+                type="username"
+                class="form-control
+                @error('username') is-invalid
+                @enderror"
+                name="username"
+                value="{{ old('username') }}"
+                required autocomplete="username"
+                placeholder="Masukkan Username"
+                autofocus
+                >
+
+                @error('username')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
             <div class="inputBox">
-            <input type="password" name="" id="" placeholder="Password" />
+                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Masukkan Password">
+
+                @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
-            <button class="btn btn-submit">Login</button>
+            <button type="submit" class="btn btn-submit">
+                Login
+            </button>
         </form>
         <hr class="garis-bawah" />
-        <a href="#">Lupa Kata Sandi?</a>
+        @if (Route::has('password.request'))
+            <a class="btn btn-link" href="{{ route('password.request') }}">
+                {{ __('Forgot Your Password?') }}
+            </a>
+        @endif
         </div>
     </div>
     </div>

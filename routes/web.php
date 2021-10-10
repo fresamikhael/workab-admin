@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\AttendanceController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\StoreController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\VisitingController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -14,102 +20,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.dashboard');
-});
-
-Route::get('/attendance', function () {
-    return view('pages.attendance.index');
-});
-
-Route::get('/attendanceedit', function () {
-    return view('pages.attendance.edit');
-});
-
-Route::get('/attendancecreate', function () {
-    return view('pages.attendance.create');
-});
-
-Route::get('/attendanceshow', function () {
-    return view('pages.attendance.show');
-});
-
-Route::get('/product', function () {
-    return view('pages.product.index');
-});
-
-Route::get('/productedit', function () {
-    return view('pages.product.edit');
-});
-
-Route::get('/productcreate', function () {
-    return view('pages.product.create');
-});
-
-Route::get('/productshow', function () {
-    return view('pages.product.show');
-});
-
-Route::get('/store', function () {
-    return view('pages.store.index');
-});
-
-Route::get('/storeedit', function () {
-    return view('pages.store.edit');
-});
-
-Route::get('/storecreate', function () {
-    return view('pages.store.create');
-});
-
-Route::get('/storeshow', function () {
-    return view('pages.store.show');
-});
-
-Route::get('/user', function () {
-    return view('pages.user.index');
-});
-
-Route::get('/useredit', function () {
-    return view('pages.user.edit');
-});
-
-Route::get('/usercreate', function () {
-    return view('pages.user.create');
-});
-
-Route::get('/usershow', function () {
-    return view('pages.user.show');
-});
-
-Route::get('/visiting', function () {
-    return view('pages.visiting.index');
-});
-
-Route::get('/visitingedit', function () {
-    return view('pages.visiting.edit');
-});
-
-Route::get('/visitingcreate', function () {
-    return view('pages.visiting.create');
-});
-
-Route::get('/visitingshow', function () {
-    return view('pages.visiting.show');
-});
-
 Route::get('/login', function () {
     return view('pages.auth.login');
 });
 
+Route::prefix('admin')
+    // ->middleware(['auth', 'admin'])
+    ->group(function() {
+        Route::get('/', [DashboardController::class, 'index'])->name('admin-dashboard');
+        Route::resource('store', StoreController::class);
+        Route::resource('visiting', VisitingController::class);
+        Route::resource('user', UserController::class);
+        Route::resource('attendance', AttendanceController::class);
+        Route::resource('product', ProductController::class);
+    });
+
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
